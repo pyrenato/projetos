@@ -1,0 +1,169 @@
+class BombaCombustivel:
+    def __init__(self, tipoCombustivel = 'gasolina', valorLitro = 4.29, qtdCombustivel = 10000):
+        self.tipoCombustivel = tipoCombustivel
+        self.valorLitro = valorLitro
+        self.qtdCombustivel = qtdCombustivel
+
+    def abastecerPorValor(self, valor):
+        self.valor = valor
+        qtdLitros = valor / self.valorLitro
+        print(f'Quantidade de litros abastecidos: {qtdLitros:.2f} l\n')
+        self.qtdCombustivel -= qtdLitros
+
+    def abastecerPorLitro(self, litro):
+        self.litro = litro
+        valorTotal = litro * self.valorLitro
+        print(f'Valor total a ser pago por {litro:.2f} litros: R${valorTotal:.2f}\n')
+        self.qtdCombustivel -= litro
+
+    def setValorLitro(self, valorLitro):
+        self.valorLitro = valorLitro
+
+    def setTipoCombustivel(self, tipoCombustivel):
+        self.tipoCombustivel = tipoCombustivel
+
+    def setQtdCombustivel(self, qtdCombustivel):
+        self.qtdCombustivel = qtdCombustivel
+
+bombaGasolina = BombaCombustivel()
+bombaEtanol = BombaCombustivel('Etanol', 2.99)
+bombaDiesel = BombaCombustivel('Diesel', 3.69)
+while True:
+    print('''----- Posto Gasosa Barata -----
+    1- Menu de Abastecimento
+    2- Configurações
+    3- Sair do sistema''')
+    opcao = int(input('Digite a opção: '))
+
+    if opcao == 1:
+        while True:
+            print('''\n--- Menu de Abastecimento ---
+    Escolha o tipo de combustível:
+    1- Gasolina
+    2- Etanol
+    3- Diesel
+    4- Voltar ao menu anterior''')
+            opc = int(input('Digite uma opção: '))
+            #Menu da gasolina
+            if opc == 1:
+
+                while True:
+                    print('''--- Gasolina ---
+    1- Abastecer por Valor
+    2- Abastecer por Litro
+    3- Voltar''')
+                    opc = int(input('Digite uma opção: '))
+
+                    if opc == 1:
+                        bombaGasolina.abastecerPorValor(float(input('Valor a ser abastecido: R$ ')))
+                    elif opc == 2:
+                        bombaGasolina.abastecerPorLitro(float(input('Quantidade de litros a ser abastecido: ')))
+                    elif opc == 3:
+                        break
+                    else:
+                        print('\nOpção Inválida!\n')
+
+            #Menu do etanol
+            elif opc == 2:
+                while True:
+                    print('''--- Etanol ---
+    1- Abastecer por Valor
+    2- Abastecer por Litro
+    3- Voltar''')
+                    opc = int(input('Digite uma opção: '))
+
+                    if opc == 1:
+                        bombaEtanol.abastecerPorValor(float(input('Valor a ser abastecido: R$ ')))
+                    elif opc == 2:
+                        bombaEtanol.abastecerPorLitro(float(input('Quantidade de litros a ser abastecido: ')))
+                    elif opc == 3:
+                        break
+                    else:
+                        print('\nOpção Inválida!\n')
+
+            #Menu do diesel
+            elif opc == 3:
+                while True:
+                    print('''--- Diesel ---
+    1- Abastecer por Valor
+    2- Abastecer por Litro
+    3- Voltar''')
+                    opc = int(input('Digite uma opção: '))
+
+                    if opc == 1:
+                        bombaDiesel.abastecerPorValor(float(input('Valor a ser abastecido: R$ ')))
+                    elif opc == 2:
+                        bombaDiesel.abastecerPorLitro(float(input('Quantidade de litros a ser abastecido: ')))
+                    elif opc == 3:
+                        break
+                    else:
+                        print('\nOpção Inválida!\n')
+
+            elif opc == 4:
+                break
+            else:
+                print('\nOpção Inválida!\n')
+    elif opcao == 2:
+        while True:
+            print('''--- Configurações ---
+    1- Alterar valor do combustível
+    2- Verificar quantidade de litros disponíveis na bomba
+    3- Voltar ao menu principal''')
+            opc = int(input('Digite a opção: '))
+
+            if opc == 1:
+                while True:
+                    print('''--- Alteração do preço do Combustível ---
+    1- Gasolina
+    2- Etanol
+    3- Diesel
+    4- Voltar''')
+                    opc = int(input('Digite a opção do combustível que deseja alterar: '))
+                    if opc == 1:
+                        bombaGasolina.setValorLitro(float(input('Novo valor do litro da gasolina: R$ ')))
+                        print('\nValor alterado com sucesso!\n')
+                        break
+                    elif opc == 2:
+                        bombaEtanol.setValorLitro(float(input('Novo valor do litro do etanol: R$ ')))
+                        print('\nValor alterado com sucesso!\n')
+                        break
+                    elif opc == 3:
+                        bombaDiesel.setValorLitro(float(input('Novo valor do litro do diesel: R$ ')))
+                        print('\nValor alterado com sucesso!\n')
+                        break
+                    elif opc == 4:
+                        break
+                    else:
+                        print('\nOpção Inválida!\n')
+
+            elif opc == 2:
+                while True:
+                    print('''--- Quantidade de Combustível na Bomba ---
+    1- Gasolina
+    2- Etanol
+    3- Diesel
+    4- Voltar''')
+                    opc = int(input('Digite a opção: '))
+                    if opc == 1:
+                        print(f'A quantidade de gasolina na bomba é de {bombaGasolina.qtdCombustivel:.2f} l')
+                        break
+                    elif opc == 2:
+                        print(f'A quantidade de etanol na bomba é de {bombaEtanol.qtdCombustivel:.2f} l')
+                        break
+                    elif opc == 3:
+                        print(f'A quantidade de diesel na bomba é de {bombaDiesel.qtdCombustivel:.2f} l')
+                        break
+                    elif opc == 4:
+                        break
+                    else:
+                        print('\nOpção inválida!\n')
+
+            elif opc == 3:
+                break
+            else:
+                print('\nOpção Inválida!\n')
+
+    elif opcao == 3:
+        break
+    else:
+        print('\nOpção Inválida!\n')
